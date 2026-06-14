@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/imob-flow-lab.jpg.asset.json" with { type: "json" };
 import logoAsset from "@/assets/imob-flow-lab-logo.jpg.asset.json";
 
 export function SiteHeader() {
@@ -26,5 +25,20 @@ export function SiteHeader() {
   );
 }
 
-// keep tsc happy if someone imports `logo`
-export const _logo = logo;
+export function SiteFooter() {
+  return (
+    <footer className="border-t border-border/60 bg-background mt-24">
+      <div className="container-page py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <img src={logoAsset.url} alt="" className="h-6 w-6 object-contain" />
+          <span>© {new Date().getFullYear()} Imob Flow Lab. Todos os direitos reservados.</span>
+        </div>
+        <div className="flex gap-5">
+          <a href="#" className="hover:text-foreground">Privacidade</a>
+          <a href="#" className="hover:text-foreground">Termos</a>
+          <a href="mailto:contato@imobflowlab.com" className="hover:text-foreground">Contato</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
