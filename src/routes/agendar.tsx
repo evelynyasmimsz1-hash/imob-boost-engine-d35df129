@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { useEffect, useRef } from "react";
 
-// TODO: substitua pelo seu link real do GHL Calendar
-const GHL_CALENDAR_URL = "https://api.leadconnectorhq.com/widget/booking/SEU_ID_DO_CALENDARIO";
+const GHL_CALENDAR_URL = "https://api.leadconnectorhq.com/widget/booking/i00BtuRjIRubmkoO9PTB";
 
 export const Route = createFileRoute("/agendar")({
   head: () => ({
@@ -17,6 +17,20 @@ export const Route = createFileRoute("/agendar")({
 });
 
 function AgendarPage() {
+  const scriptRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!scriptRef.current) return;
+    const existing = document.getElementById("ghl-form-embed-script");
+    if (existing) return;
+    const script = document.createElement("script");
+    script.id = "ghl-form-embed-script";
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
+    script.type = "text/javascript";
+    script.async = true;
+    scriptRef.current.appendChild(script);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
@@ -42,9 +56,11 @@ function AgendarPage() {
             src={GHL_CALENDAR_URL}
             title="Agendamento Imob Flow Lab"
             className="w-full rounded-2xl"
-            style={{ height: "780px", border: "none" }}
+            style={{ height: "780px", border: "none", overflow: "hidden" }}
             scrolling="no"
+            id="i00BtuRjIRubmkoO9PTB_1781406068482"
           />
+          <div ref={scriptRef} />
         </div>
 
         <aside className="space-y-5">
