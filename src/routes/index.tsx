@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
+import { QualifyCta } from "@/components/QualifyDialog";
 import logoAsset from "@/assets/imob-flow-lab-logo.jpg.asset.json";
 import rafaelImg from "@/assets/testimonial-rafael.jpg";
 import camilaImg from "@/assets/testimonial-camila.jpg";
@@ -219,12 +220,9 @@ function Home() {
                 Um sistema completo de aquisição com I.A. que prospecta, qualifica e agenda visitas com compradores reais — sem depender só de portais ou indicação.
               </p>
               <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <Link
-                  to="/agendar"
-                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated"
-                >
+                <QualifyCta className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated">
                   Agendar sessão estratégica gratuita →
-                </Link>
+                </QualifyCta>
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
                     <img src={rafaelImg} alt="" className="h-8 w-8 rounded-full object-cover border-2 border-background" />
@@ -454,12 +452,9 @@ function Home() {
               <li className="flex gap-3"><span className="text-success">✓</span> Projeção realista de vendas em 90 dias</li>
               <li className="flex gap-3"><span className="text-success">✓</span> Recomendação de stack de I.A. ideal</li>
             </ul>
-            <Link
-              to="/agendar"
-              className="mt-7 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
-            >
+            <QualifyCta className="mt-7 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition">
               Quero agendar minha sessão →
-            </Link>
+            </QualifyCta>
             <p className="mt-3 text-center text-xs text-muted-foreground">100% gratuita • Sem compromisso</p>
           </div>
         </div>
@@ -492,12 +487,9 @@ function Home() {
             <p className="mt-5 text-muted-foreground max-w-xl mx-auto">
               Agende uma sessão estratégica gratuita e descubra exatamente o que muda no seu funil nos próximos 90 dias.
             </p>
-            <Link
-              to="/agendar"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-7 py-4 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated"
-            >
+            <QualifyCta className="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-7 py-4 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated">
               Agendar sessão estratégica →
-            </Link>
+            </QualifyCta>
           </div>
         </div>
       </section>

@@ -38,14 +38,14 @@ function AgendarPage() {
       <section className="hero-bg border-b border-border">
         <div className="container-page pt-14 pb-10 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground shadow-soft">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Passo 1 de 2 — Escolha um horário
+            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-dot" />
+            Você está dentro
           </div>
           <h1 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight">
-            Agende sua sessão estratégica gratuita
+            Você está dentro! <span className="text-gradient">Agende sua call</span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-            Após escolher o horário, você será direcionado a uma página com um vídeo curto e essencial para preparar nossa conversa.
+            Escolha o melhor horário abaixo. Em seguida você receberá a confirmação por email com o link da reunião.
           </p>
         </div>
       </section>
