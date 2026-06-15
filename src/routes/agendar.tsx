@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { useEffect, useRef } from "react";
 
@@ -38,14 +38,14 @@ function AgendarPage() {
       <section className="hero-bg border-b border-border">
         <div className="container-page pt-14 pb-10 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground shadow-soft">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Passo 1 de 2 — Escolha um horário
+            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-dot" />
+            Você está dentro
           </div>
           <h1 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight">
-            Agende sua sessão estratégica gratuita
+            Você está dentro! <span className="text-gradient">Agende sua call</span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
-            Após escolher o horário, você será direcionado a uma página com um vídeo curto e essencial para preparar nossa conversa.
+            Escolha o melhor horário abaixo. Em seguida você receberá a confirmação por email com o link da reunião.
           </p>
         </div>
       </section>
@@ -80,10 +80,10 @@ function AgendarPage() {
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6 shadow-soft text-sm text-muted-foreground">
-            Já agendou?{" "}
-            <Link to="/pre-call" className="text-foreground font-medium underline underline-offset-4">
-              Acesse a página de preparação →
-            </Link>
+            Dúvidas antes da call? Fale com a gente em{" "}
+            <a href="mailto:contato@imobflowlab.com" className="text-foreground font-medium underline underline-offset-4">
+              contato@imobflowlab.com
+            </a>
           </div>
         </aside>
       </section>

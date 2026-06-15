@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/imob-flow-lab-logo.jpg.asset.json";
+import { QualifyCta } from "@/components/QualifyDialog";
 
 export function SiteHeader() {
   return (
@@ -14,12 +15,9 @@ export function SiteHeader() {
           <a href="/#provas" className="hover:text-foreground transition">Resultados</a>
           <a href="/#faq" className="hover:text-foreground transition">FAQ</a>
         </nav>
-        <Link
-          to="/agendar"
-          className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground hover:opacity-90 transition"
-        >
+        <QualifyCta className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground hover:opacity-90 transition">
           Agendar sessão
-        </Link>
+        </QualifyCta>
       </div>
     </header>
   );
