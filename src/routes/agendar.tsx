@@ -80,10 +80,10 @@ function AgendarPage() {
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6 shadow-soft text-sm text-muted-foreground">
-            Já agendou?{" "}
-            <Link to="/pre-call" className="text-foreground font-medium underline underline-offset-4">
-              Acesse a página de preparação →
-            </Link>
+            Dúvidas antes da call? Fale com a gente em{" "}
+            <a href="mailto:contato@imobflowlab.com" className="text-foreground font-medium underline underline-offset-4">
+              contato@imobflowlab.com
+            </a>
           </div>
         </aside>
       </section>
