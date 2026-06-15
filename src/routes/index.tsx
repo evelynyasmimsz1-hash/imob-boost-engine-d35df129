@@ -219,7 +219,21 @@ function Home() {
               <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
                 Um sistema completo de aquisição com I.A. que prospecta, qualifica e agenda visitas com compradores reais — sem depender só de portais ou indicação.
               </p>
-              <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+
+              {/* Video embed */}
+              <div className="mt-8 w-full max-w-xl rounded-2xl border border-border bg-card overflow-hidden shadow-elevated">
+                <div className="relative w-full" style={{ paddingBottom: "52.5%" }}>
+                  <iframe
+                    allow="fullscreen"
+                    allowFullScreen
+                    src="https://streamable.com/e/tnhom5"
+                    className="absolute inset-0 w-full h-full rounded-2xl"
+                    style={{ border: "none" }}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <QualifyCta className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated">
                   Agendar sessão estratégica gratuita →
                 </QualifyCta>
