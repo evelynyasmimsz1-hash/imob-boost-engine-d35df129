@@ -200,6 +200,16 @@ function HeroDashboard() {
 }
 
 function Home() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://fast.wistia.net/player.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
