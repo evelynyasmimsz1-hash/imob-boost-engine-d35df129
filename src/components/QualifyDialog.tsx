@@ -319,19 +319,24 @@ export function QualifyCta({
                   </p>
                 )}
               </div>
+              {submitError && (
+                <p className="text-xs text-destructive">{submitError}</p>
+              )}
               <div className="flex items-center justify-between pt-2">
                 <button
                   type="button"
                   onClick={() => setStep((s) => Math.max(0, s - 1))}
-                  className="text-xs text-muted-foreground hover:text-foreground"
+                  disabled={submitting}
+                  className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-50"
                 >
                   ← Voltar
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated"
+                  disabled={submitting}
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated disabled:opacity-60"
                 >
-                  Agendar minha call →
+                  {submitting ? "Enviando..." : "Agendar minha call →"}
                 </button>
               </div>
             </form>
