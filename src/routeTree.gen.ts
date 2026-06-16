@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PreCallRouteImport } from './routes/pre-call'
 import { Route as AgendarRouteImport } from './routes/agendar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiCreateLeadRouteImport } from './routes/api/create-lead'
 
 const PreCallRoute = PreCallRouteImport.update({
   id: '/pre-call',
@@ -28,35 +29,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCreateLeadRoute = ApiCreateLeadRouteImport.update({
+  id: '/api/create-lead',
+  path: '/api/create-lead',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agendar': typeof AgendarRoute
   '/pre-call': typeof PreCallRoute
+  '/api/create-lead': typeof ApiCreateLeadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agendar': typeof AgendarRoute
   '/pre-call': typeof PreCallRoute
+  '/api/create-lead': typeof ApiCreateLeadRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agendar': typeof AgendarRoute
   '/pre-call': typeof PreCallRoute
+  '/api/create-lead': typeof ApiCreateLeadRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agendar' | '/pre-call'
+  fullPaths: '/' | '/agendar' | '/pre-call' | '/api/create-lead'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agendar' | '/pre-call'
-  id: '__root__' | '/' | '/agendar' | '/pre-call'
+  to: '/' | '/agendar' | '/pre-call' | '/api/create-lead'
+  id: '__root__' | '/' | '/agendar' | '/pre-call' | '/api/create-lead'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendarRoute: typeof AgendarRoute
   PreCallRoute: typeof PreCallRoute
+  ApiCreateLeadRoute: typeof ApiCreateLeadRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/create-lead': {
+      id: '/api/create-lead'
+      path: '/api/create-lead'
+      fullPath: '/api/create-lead'
+      preLoaderRoute: typeof ApiCreateLeadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendarRoute: AgendarRoute,
   PreCallRoute: PreCallRoute,
+  ApiCreateLeadRoute: ApiCreateLeadRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
