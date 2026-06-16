@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { QualifyCta } from "@/components/QualifyDialog";
@@ -199,6 +200,16 @@ function HeroDashboard() {
 }
 
 function Home() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://fast.wistia.net/player.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
@@ -222,14 +233,21 @@ function Home() {
 
               {/* Video embed */}
               <div className="mt-8 w-full max-w-xl rounded-2xl border border-border bg-card overflow-hidden shadow-elevated">
-                <div className="relative w-full" style={{ paddingBottom: "52.5%" }}>
-                  <iframe
-                    allow="fullscreen"
-                    allowFullScreen
-                    src="https://streamable.com/e/tnhom5"
-                    className="absolute inset-0 w-full h-full rounded-2xl"
-                    style={{ border: "none" }}
-                  />
+                <div className="wistia_responsive_padding" style={{ padding: "52.5% 0 0 0", position: "relative" }}>
+                  <div className="wistia_responsive_wrapper" style={{ height: "100%", left: 0, position: "absolute", top: 0, width: "100%" }}>
+                    <iframe
+                      src="https://fast.wistia.net/embed/iframe/475c3etqla?web_component=true&seo=true"
+                      title="Gravação de Tela 2026-06-14 às 22.09.21 Video"
+                      allow="autoplay; fullscreen"
+                      allowTransparency
+                      frameBorder={0}
+                      scrolling="no"
+                      className="wistia_embed"
+                      name="wistia_embed"
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
                 </div>
               </div>
 
