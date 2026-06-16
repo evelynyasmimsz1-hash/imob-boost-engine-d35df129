@@ -107,8 +107,12 @@ export function QualifyCta({
     setTimeout(() => setStep((s) => s + 1), 120);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setSubmitError(null);
     const parsed = contactSchema.safeParse({
       name: answers.name,
       phone: answers.phone,
@@ -122,16 +126,68 @@ export function QualifyCta({
       setErrors(errs);
       return;
     }
-    try {
-      sessionStorage.setItem(
-        "imobflowlab:lead",
-        JSON.stringify({ ...answers, ...parsed.data, at: Date.now() })
-      );
-    } catch {
-      /* ignore */
+
+    let utm_source = "";
+    let utm_campaign = "";
+    let utm_content = "";
+    if (typeof window !== "undefined") {
+      const sp = new URLSearchParams(window.location.search);
+      utm_source = sp.get("utm_source") ?? "";
+      utm_campaign = sp.get("utm_campaign") ?? "";
+      utm_content = sp.get("utm_content") ?? "";
     }
-    setOpen(false);
-    navigate({ to: "/agendar" });
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/create-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: parsed.data.name,
+          email: parsed.data.email,
+          phone: parsed.data.phone,
+          answers: {
+            role: answers.role,
+            goal: answers.goal,
+            callCenter: answers.callCenter,
+            brokers: answers.brokers,
+          },
+          utm_source,
+          utm_campaign,
+          utm_content,
+        }),
+      });
+
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(body?.error ?? "Erro ao enviar");
+      }
+
+      try {
+        sessionStorage.setItem(
+          "imobflowlab:lead",
+          JSON.stringify({ ...answers, ...parsed.data, at: Date.now() })
+        );
+      } catch {
+        /* ignore */
+      }
+
+      try {
+        const w = window as unknown as { fbq?: (...args: unknown[]) => void };
+        w.fbq?.("track", "Lead");
+      } catch {
+        /* ignore */
+      }
+
+      setOpen(false);
+      navigate({ to: "/agendar" });
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Erro ao enviar. Tente novamente."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -263,19 +319,24 @@ export function QualifyCta({
                   </p>
                 )}
               </div>
+              {submitError && (
+                <p className="text-xs text-destructive">{submitError}</p>
+              )}
               <div className="flex items-center justify-between pt-2">
                 <button
                   type="button"
                   onClick={() => setStep((s) => Math.max(0, s - 1))}
-                  className="text-xs text-muted-foreground hover:text-foreground"
+                  disabled={submitting}
+                  className="text-xs text-muted-foreground hover:text-foreground disabled:opacity-50"
                 >
                   ← Voltar
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated"
+                  disabled={submitting}
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:opacity-90 transition shadow-elevated disabled:opacity-60"
                 >
-                  Agendar minha call →
+                  {submitting ? "Enviando..." : "Agendar minha call →"}
                 </button>
               </div>
             </form>
