@@ -130,11 +130,15 @@ export function QualifyCta({
     let utm_source = "";
     let utm_campaign = "";
     let utm_content = "";
+    let fbclid = "";
+    let page_url = "";
     if (typeof window !== "undefined") {
       const sp = new URLSearchParams(window.location.search);
       utm_source = sp.get("utm_source") ?? "";
       utm_campaign = sp.get("utm_campaign") ?? "";
       utm_content = sp.get("utm_content") ?? "";
+      fbclid = sp.get("fbclid") ?? "";
+      page_url = window.location.href;
     }
 
     setSubmitting(true);
@@ -155,6 +159,8 @@ export function QualifyCta({
           utm_source,
           utm_campaign,
           utm_content,
+          fbclid,
+          page_url,
         }),
       });
 
